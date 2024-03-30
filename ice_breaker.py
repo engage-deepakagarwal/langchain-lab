@@ -4,6 +4,7 @@ from langchain import LLMChain, PromptTemplate
 from langchain_openai import AzureChatOpenAI
 
 # The module name must use an underscore in the name
+from agents.linkedin_lookup_agent import lookup
 from third_parties.linkedin import scrape_linkedin_profile
 
 # Passing 'override' flag to override existing environment variable with the same name.
@@ -24,8 +25,9 @@ if __name__ == '__main__':
     # Pick a model which supports ChatCompletion API
     llm = AzureChatOpenAI(azure_deployment='turbo', temperature=0.1)
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
-    linkedin_data = scrape_linkedin_profile(
-        'https://www.linkedin.com/in/harrison-chase-961287118/')
+
+    linkedin_profile_url = lookup(search_string = "deepak agarwal azure certified solutions architect")
+    linkedin_data = scrape_linkedin_profile(linkedin_profile_url=linkedin_profile_url)
     result = chain.invoke(input={"information": linkedin_data})
 
     print(result)

@@ -1,3 +1,5 @@
 langchain==0.1.13
 python-dotenv==1.0.1
 langchain-openai==0.1.1
+langchainhub==0.1.15
+google_search_results==2.4.2
