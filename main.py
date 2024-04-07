@@ -7,6 +7,8 @@ from langchain.agents.output_parsers import ReActSingleInputOutputParser
 from langchain_core.agents import AgentAction, AgentFinish
 from langchain_openai import AzureChatOpenAI
 from langchain.agents import Tool
+
+from callbacks import AgentCallbackHandler
 from tools.text_length import get_text_length
 
 load_dotenv()
@@ -58,7 +60,7 @@ if __name__ == '__main__':
     # token. And why do we need it? Because if we won't put the stop token, then the LLM would continue to
     # generate text and it's going to guess one word after another observation. And the observation is the result
     # of the tool. And this is something that will come from running our tool.
-    llm = AzureChatOpenAI(temperature=0, azure_deployment='turbo', stop=["Observation"])
+    llm = AzureChatOpenAI(temperature=0, azure_deployment='turbo', stop=["Observation"], callbacks=[AgentCallbackHandler()])
 
     # This will hold the history of the agent invocations a.k.a agent_scratchpad
     intermediate_steps = []
