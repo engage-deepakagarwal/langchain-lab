@@ -1,7 +1,6 @@
 langchain==0.1.13
 langchain-community==0.0.32
-langchain-pinecone==0.1.0
 python-dotenv==1.0.1
 langchain-openai==0.1.1
 langchainhub==0.1.15
-pinecone-client==3.2.2
+pypdf==4.2.0
